@@ -1,0 +1,19 @@
+{
+    "data": {
+        "business1":{
+            "name": "businessName",
+            "status": "active or inactive",
+            "address": "Alamo Street 123, San Antonio TX 78205", 
+            "permitBeginDate": "dd/mm/yy",
+            "permitEndDate": "dd/mm/yy" 
+        },
+        "test2": {
+        "name": "test456",
+        "surname": "surname456"
+        },
+        "test3": {
+        "name": "test789",
+        "surname": "surname789"
+        }
+    }
+}
