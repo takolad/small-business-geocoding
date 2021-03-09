@@ -105,3 +105,4 @@ dist
 
 # macOS files
 .DS_Store
+assets/ignore

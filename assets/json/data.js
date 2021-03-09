@@ -1,4 +1,3 @@
-
 var muhData = {
     "type": "FeatureCollection",
     "features": [
