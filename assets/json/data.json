@@ -1,0 +1,35 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-98.48509655083555, 29.421237897837184]
+            },
+            "properties": {
+                "name": "Henry B. Gonzalez Convention Center"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-98.4862064826434, 29.426206813345832]
+            },
+            "properties": {
+                "name": "Alamo Basement"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-98.4957626263068141, 29.42654262325131]
+            },
+            "properties": {
+                "name": "Domino's Pizza"
+            }
+        }
+    ]
+}
