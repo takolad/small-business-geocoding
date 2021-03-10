@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    // import Data from '../json/data.js';
     $(".dropdown-trigger").dropdown();
     mapboxgl.accessToken = 'pk.eyJ1IjoidGFrb2xhZCIsImEiOiJja2x5MWRxMG8xNG82MnVwYnp0d2RlenE0In0.B_zd2XTmTSmCPhJtOCo3Vw';
     var map = new mapboxgl.Map({
@@ -12,14 +11,16 @@ $(document).ready(function(){
     // Big Willie's Map Time
     map.on('load', function (e) {
         /* Add the data to your map as a layer */
-        map.addLayer({
-            "id": "locations",
-            "type": "circle",
-            /* Add a GeoJSON source containing place coordinates and information. */
-            "source": {
-            "type": "geojson",
-            "data": muhData
-            }
-        }); 
+        for (var i = 0; i < muhData.features.length; i++) {
+            map.addLayer({
+                "id": "locations" + i,
+                "type": "circle",
+                /* Add a GeoJSON source containing place coordinates and information. */
+                "source": {
+                "type": "geojson",
+                "data": muhData.features[i],
+                }
+            });
+        }
     });
 });
