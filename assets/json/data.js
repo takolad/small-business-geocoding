@@ -16,7 +16,7 @@ var muhData = {
           "postalCode": "78205",
           "permitBeginDate": "dd/mm/yy",
           "permitEndDate": "dd/mm/yy" 
-      }
+      },
     }
   ]
 }

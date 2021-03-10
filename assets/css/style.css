@@ -2,3 +2,22 @@
     display: flex;
     justify-content: center;
 }
+
+#map {
+    min-width: 400px;
+    min-height: 300px;
+}
+/*  .mapboxgl-ctrl-bottom-left
+    .mapboxgl-ctrl-bottom-right */
+
+@media screen and (max-width: 1920px) {
+    #map {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #map {
+        width: 90%;
+    }
+}
