@@ -30,17 +30,3 @@ map.on('load', function (e) {
       }
     });
   });
-
-    // Big Willie's Map Time
-    // map.on('load', function (e) {
-    //     /* Add the data to your map as a layer */
-    //     map.addLayer({
-    //         "id": "locations",
-    //         "type": "circle",
-    //         /* Add a GeoJSON source containing place coordinates and information. */
-    //         "source": {
-    //         "type": "geojson",
-    //         "data": muhData
-    //         }
-    //     }); 
-    // });
