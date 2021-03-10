@@ -1,3 +1,4 @@
+// Variable containing all business within ZIP 78205
 var muhData = {
     "type": "FeatureCollection",
     "features": [
