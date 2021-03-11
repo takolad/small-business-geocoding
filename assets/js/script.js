@@ -21,6 +21,7 @@ $(document).ready(function(){
       }
     });
   });
+<<<<<<< HEAD
 })
 =======
     $(".dropdown-trigger").dropdown();
@@ -49,3 +50,6 @@ $(document).ready(function(){
     });
 });
 >>>>>>> e6a2c1ba3e0e1a647cd14793ce59fb8a554b7296
+=======
+});
+>>>>>>> 9b11f465bc58c9ddb48d92f2188e0c0407271922
