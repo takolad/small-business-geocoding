@@ -1,5 +1,10 @@
 .mapDiv {
-    margin-top: 25px;
+    margin-top: 1.75rem;
     display: flex;
     justify-content: center;
+}
+
+#map {
+    min-width: 400px;
+    min-height: 300px;
 }
