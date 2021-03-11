@@ -1,19 +1,35 @@
 {
-    "data": {
-        "business1":{
-            "name": "businessName",
-            "status": "active or inactive",
-            "address": "Alamo Street 123, San Antonio TX 78205", 
-            "permitBeginDate": "dd/mm/yy",
-            "permitEndDate": "dd/mm/yy" 
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-98.48509655083555, 29.421237897837184]
+            },
+            "properties": {
+                "name": "Henry B. Gonzalez Convention Center"
+            }
         },
-        "test2": {
-        "name": "test456",
-        "surname": "surname456"
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-98.4862064826434, 29.426206813345832]
+            },
+            "properties": {
+                "name": "Alamo Basement"
+            }
         },
-        "test3": {
-        "name": "test789",
-        "surname": "surname789"
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-98.4957626263068141, 29.42654262325131]
+            },
+            "properties": {
+                "name": "Domino's Pizza"
+            }
         }
-    }
+    ]
 }
