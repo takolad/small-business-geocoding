@@ -1,1 +1,1 @@
-# covid_killed_small_business
+# small-business-geocoding
