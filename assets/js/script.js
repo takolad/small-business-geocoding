@@ -1,5 +1,4 @@
 $(document).ready(function(){
-<<<<<<< HEAD
   // import Data from "../json/data.json"
   $(".dropdown-trigger").dropdown();
   mapboxgl.accessToken = 'pk.eyJ1IjoidGFrb2xhZCIsImEiOiJja2x5MWRxMG8xNG82MnVwYnp0d2RlenE0In0.B_zd2XTmTSmCPhJtOCo3Vw';
@@ -21,9 +20,6 @@ $(document).ready(function(){
       }
     });
   });
-<<<<<<< HEAD
-})
-=======
     $(".dropdown-trigger").dropdown();
     mapboxgl.accessToken = 'pk.eyJ1IjoidGFrb2xhZCIsImEiOiJja2x5MWRxMG8xNG82MnVwYnp0d2RlenE0In0.B_zd2XTmTSmCPhJtOCo3Vw';
     var map = new mapboxgl.Map({
@@ -49,7 +45,3 @@ $(document).ready(function(){
         }
     });
 });
->>>>>>> e6a2c1ba3e0e1a647cd14793ce59fb8a554b7296
-=======
-});
->>>>>>> 9b11f465bc58c9ddb48d92f2188e0c0407271922
