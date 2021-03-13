@@ -1,5 +1,5 @@
 // Variable containing all business within ZIP 78205
-var muhData = {
+var activeData = {
     "type": "FeatureCollection",
     "features": [
     {
@@ -105,4 +105,50 @@ var muhData = {
       },
     },
   ]
+}
+
+var inactiveData = {
+    "type": "FeatureCollection",
+    "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-98.481323,29.420312],
+      },
+      "properties": {
+          "name": "Dead Business 1",
+          "status": "Inactive",
+          "address": "123 Blah Blah ST",
+          "city": "SAN ANTONIO",
+          "country": "TEXAS",
+          "postalCode": "ZIP 78205",
+          "permitBeginDate": "DD/MM/YY",
+          "permitEndDate": "DD/MM/YY" 
+      },
+    },
+  ]
+}
+
+var changedData = {
+  "type": "FeatureCollection",
+  "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-98.48523,29.420312],
+    },
+    "properties": {
+        "name": "Changed Business 1",
+        "status": "Changed - Moved elsewhere",
+        "address": "123 Blah Blah ST",
+        "city": "SAN ANTONIO",
+        "country": "TEXAS",
+        "postalCode": "ZIP 78205",
+        "permitBeginDate": "DD/MM/YY",
+        "permitEndDate": "DD/MM/YY" 
+    },
+  },
+]
 }

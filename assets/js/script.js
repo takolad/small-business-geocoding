@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+    var inactiveB = $("#inactiveButton")
+    var activeB = $("#activeButton")
+    var changedB = $("#changedButton")
+
     /* This will let you use the .remove() function later on */
     if (!('remove' in Element.prototype)) {
         Element.prototype.remove = function() {
@@ -8,7 +12,7 @@ $(document).ready(function(){
         }
         };
     }
-
+    
     $(".dropdown-trigger").dropdown();
     mapboxgl.accessToken = 'pk.eyJ1IjoidGFrb2xhZCIsImEiOiJja2x5MWRxMG8xNG82MnVwYnp0d2RlenE0In0.B_zd2XTmTSmCPhJtOCo3Vw';
     var map = new mapboxgl.Map({
@@ -46,27 +50,86 @@ $(document).ready(function(){
     }
 
     /* Assign a unique ID to each store */
-    muhData.features.forEach(function(store, i){
+    activeData.features.forEach(function(store, i){
         store.properties.id = i;
     });
 
-    map.on('load', function (e) {
+    activeB.on('click', function (e) {
         /* Add the data to your map as a layer */
     map.addLayer({
-        "id": "locations",
+        "id": "activeLocations",
         "type": "circle",
         /* Add a GeoJSON source containing place coordinates and information. */
         "source": {
         "type": "geojson",
-        "data": muhData
+        "data": activeData
         }
         });
     });
-
+    inactiveB.on('click', function (e) {
+        /* Add the data to your map as a layer */
+    map.addLayer({
+        "id": "inactiveLocations",
+        "type": "circle",
+        /* Add a GeoJSON source containing place coordinates and information. */
+        "source": {
+        "type": "geojson",
+        "data": inactiveData
+        }
+        });
+    });
+    changedB.on('click', function (e) {
+        /* Add the data to your map as a layer */
+    map.addLayer({
+        "id": "changedLocations",
+        "type": "circle",
+        /* Add a GeoJSON source containing place coordinates and information. */
+        "source": {
+        "type": "geojson",
+        "data": changedData
+        }
+        });
+    });
+    
+    // Changes the dataset in use
     map.on('click', function(e) {
         /* Determine if a feature in the "locations" layer exists at that point. */
         var features = map.queryRenderedFeatures(e.point, {
-          layers: ['locations']
+          layers: ['inactiveLocations'],
+        });
+        
+        /* If yes, then: */
+        if (features.length) {
+          var clickedPoint = features[0];
+          
+          /* Fly to the point */
+          flyToStore(clickedPoint);
+          
+          /* Close all other popups and display popup for clicked store */
+          createPopUp(clickedPoint);
+        }
+    });
+    map.on('click', function(e) {
+        /* Determine if a feature in the "locations" layer exists at that point. */
+        var features = map.queryRenderedFeatures(e.point, {
+          layers: ['activeLocations'],
+        });
+        
+        /* If yes, then: */
+        if (features.length) {
+          var clickedPoint = features[0];
+          
+          /* Fly to the point */
+          flyToStore(clickedPoint);
+          
+          /* Close all other popups and display popup for clicked store */
+          createPopUp(clickedPoint);
+        }
+    });
+    map.on('click', function(e) {
+        /* Determine if a feature in the "locations" layer exists at that point. */
+        var features = map.queryRenderedFeatures(e.point, {
+          layers: ['changedLocations'],
         });
         
         /* If yes, then: */
