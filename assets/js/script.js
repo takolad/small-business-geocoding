@@ -1,17 +1,23 @@
+var activeOn = false;
+var inactiveOn = false;
+var changedOn = false;
+
 $(document).ready(function(){
 
-    var inactiveB = $("#inactiveButton")
-    var activeB = $("#activeButton")
-    var changedB = $("#changedButton")
+    var inactiveB = $("#inactiveButton");
+    var activeB = $("#activeButton");
+    var changedB = $("#changedButton");
+    
+
 
     /* This will let you use the .remove() function later on */
     if (!('remove' in Element.prototype)) {
         Element.prototype.remove = function() {
-        if (this.parentNode) {
-            this.parentNode.removeChild(this);
-        }
+            if (this.parentNode) {
+                this.parentNode.removeChild(this);
+            }
         };
-    }
+    };
     
     $(".dropdown-trigger").dropdown();
     mapboxgl.accessToken = 'pk.eyJ1IjoidGFrb2xhZCIsImEiOiJja2x5MWRxMG8xNG82MnVwYnp0d2RlenE0In0.B_zd2XTmTSmCPhJtOCo3Vw';
@@ -25,26 +31,27 @@ $(document).ready(function(){
 
 
     function flyToStore(currentFeature) {
-    map.flyTo({
-        center: currentFeature.geometry.coordinates,
-        zoom: 15
-    });
-    }
+        map.flyTo({
+            center: currentFeature.geometry.coordinates,
+            zoom: 15
+        });
+    };
 
     function createPopUp(currentFeature) {
         var popUps = document.getElementsByClassName('mapboxgl-popup');
         /** Check if there is already a popup on the map and if so, remove it */
-        if (popUps[0]) popUps[0].remove();
+        if (popUps[0])
+            popUps[0].remove();
       
         var popup = new mapboxgl.Popup({ closeOnClick: true })
           .setLngLat(currentFeature.geometry.coordinates)
           .setHTML(
             '<h5>'+ currentFeature.properties.name + '</h5>' + 
-            '<p>' + currentFeature.properties.status + '<p>' +
-            '<p>' + currentFeature.properties.address + '<p>' + 
-            '<p>' + currentFeature.properties.city + '<p>' + 
-            '<p>' + currentFeature.properties.country + '<p>' +
-            '<p>' + currentFeature.properties.postalCode + '<p>'
+            '<p>' + currentFeature.properties.status + '</p>' +
+            '<p>' + currentFeature.properties.address + '</p>' + 
+            '<p>' + currentFeature.properties.city + '</p>' + 
+            '<p>' + currentFeature.properties.country + '</p>' +
+            '<p>' + currentFeature.properties.postalCode + '</p>'
             )
           .addTo(map);
     }
@@ -54,82 +61,89 @@ $(document).ready(function(){
         store.properties.id = i;
     });
 
-    activeB.on('click', function (e) {
-        /* Add the data to your map as a layer */
-    map.addLayer({
-        "id": "activeLocations",
-        "type": "circle",
-        /* Add a GeoJSON source containing place coordinates and information. */
-        "source": {
-        "type": "geojson",
-        "data": activeData
-        }
+
+    map.on('load', function () {
+        // active businesses
+        map.addLayer({
+            "id": "activeLocations",
+            "type": "circle",
+            /* Add a GeoJSON source containing place coordinates and information. */
+            "source": {
+            "type": "geojson",
+            "data": activeData
+            },
+            "layout": {
+                "visibility": "none"
+            }
+        });
+
+        // inactive businesses
+        map.addLayer({
+            "id": "inactiveLocations",
+            "type": "circle",
+            /* Add a GeoJSON source containing place coordinates and information. */
+            "source": {
+            "type": "geojson",
+            "data": inactiveData
+            },
+            "layout": {
+                "visibility": "none"
+            }
+        });
+
+        // changed businesses
+        map.addLayer({
+            "id": "changedLocations",
+            "type": "circle",
+            /* Add a GeoJSON source containing place coordinates and information. */
+            "source": {
+            "type": "geojson",
+            "data": changedData
+            },
+            "layout": {
+                "visibility": "none"
+            }
         });
     });
-    inactiveB.on('click', function (e) {
-        /* Add the data to your map as a layer */
-    map.addLayer({
-        "id": "inactiveLocations",
-        "type": "circle",
-        /* Add a GeoJSON source containing place coordinates and information. */
-        "source": {
-        "type": "geojson",
-        "data": inactiveData
-        }
-        });
-    });
-    changedB.on('click', function (e) {
-        /* Add the data to your map as a layer */
-    map.addLayer({
-        "id": "changedLocations",
-        "type": "circle",
-        /* Add a GeoJSON source containing place coordinates and information. */
-        "source": {
-        "type": "geojson",
-        "data": changedData
-        }
-        });
-    });
-    
-    // Changes the dataset in use
-    map.on('click', function(e) {
-        /* Determine if a feature in the "locations" layer exists at that point. */
-        var features = map.queryRenderedFeatures(e.point, {
-          layers: ['inactiveLocations'],
-        });
+
+    // enumerate ids of the layers
+    var toggleableLayerIds = ['activeLocations', 'inactiveLocations', 'changedLocations'];
+    var legitIds = ['Active', 'Inactive', 'Changed'];
+
+    // set up the corresponding toggle button for each layer
+    for (var i = 0; i < toggleableLayerIds.length; i++) {
+        var id = toggleableLayerIds[i];
+
+        var button = document.createElement('button');
+        button.classList.add('waves-effect', 'waves-light', 'cyan', 'accent-4', 'btn-large', 'z-depth-5');
+        button.setAttribute('id', id);
+        button.innerText = legitIds[i];
         
-        /* If yes, then: */
-        if (features.length) {
-          var clickedPoint = features[0];
-          
-          /* Fly to the point */
-          flyToStore(clickedPoint);
-          
-          /* Close all other popups and display popup for clicked store */
-          createPopUp(clickedPoint);
-        }
-    });
-    map.on('click', function(e) {
-        /* Determine if a feature in the "locations" layer exists at that point. */
-        var features = map.queryRenderedFeatures(e.point, {
-          layers: ['activeLocations'],
-        });
+        button.onclick = function (e) {
+        var clickedLayer = this.id;
+        e.preventDefault();
+        e.stopPropagation();
         
-        /* If yes, then: */
-        if (features.length) {
-          var clickedPoint = features[0];
-          
-          /* Fly to the point */
-          flyToStore(clickedPoint);
-          
-          /* Close all other popups and display popup for clicked store */
-          createPopUp(clickedPoint);
+        var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+        
+        // toggle layer visibility by changing the layout object's visibility property
+        if (visibility === 'visible') {
+        map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+        this.classList.remove('active');
+        } else {
+        this.classList.add('active');
+        map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
         }
-    });
+        };
+        var layers = $('.buttons');
+        layers.append(button);
+    }
+
     map.on('click', function(e) {
+
         /* Determine if a feature in the "locations" layer exists at that point. */
         var features = map.queryRenderedFeatures(e.point, {
-          layers: ['changedLocations'],
+          layers: ['activeLocations', 'inactiveLocations', 'changedLocations'],
         });
         
         /* If yes, then: */
