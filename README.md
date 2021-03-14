@@ -33,6 +33,6 @@ Mapbox CDN was used to create the interactive map and make it functional.
 
 Materialize CDN was use for nearly all CSS stylings including navbar with dropdown, cards & containers, images, buttons (with shadow effect), text stylings, etc.
 
-Google Fonts & JQuery was utelized as well
+Google Fonts & JQuery were utelized as well
 
 -Javascript Functionality-
