@@ -35,4 +35,3 @@ Materialize CDN was use for nearly all CSS stylings including navbar with dropdo
 
 Google Fonts & JQuery were utelized as well
 
--Javascript Functionality-
